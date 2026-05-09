@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKASTUKI | Shadow Legends</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        akatsukiRed: '#ff003c',
+                        akatsukiPurple: '#8a2be2',
+                        darkBg: '#050505',
+                        lightBg: '#f0f2f5',
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { --glass: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.1); }
+        .light { --glass: rgba(0, 0, 0, 0.05); --border: rgba(0, 0, 0, 0.1); }
+
+        body { transition: background-color 0.4s ease, color 0.4s ease; }
+        .glass { background: var(--glass); backdrop-filter: blur(14px); border: 1px solid var(--border); }
+        
+        .neon-red { box-shadow: 0 0 15px rgba(255, 0, 60, 0.4); }
+        .neon-text-red { text-shadow: 0 0 10px rgba(255, 0, 60, 0.8); }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        #cursor-glow {
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(255, 0, 60, 0.12) 0%, transparent 70%);
+            position: fixed; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        .slider-track { display: flex; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #ff003c; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-darkBg dark:bg-darkBg light:bg-lightBg text-white dark:text-white light:text-gray-900 font-poppins overflow-x-hidden">
+
+    <!-- Custom Cursor -->
+    <div id="cursor-glow" class="hidden md:block"></div>
+
+    <!-- Loading Screen -->
+    <div id="loader" class="fixed inset-0 z-[100] bg-darkBg flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="mb-6 relative">
+            <div class="w-24 h-24 border-4 border-akatsukiRed border-t-transparent rounded-full animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center font-orbitron text-akatsukiRed font-bold">AKA</div>
+        </div>
+        <h1 class="font-orbitron text-xl md:text-3xl font-black text-white animate-pulse tracking-widest text-center px-4">
+            AKASTUKI <br> <span class="text-akatsukiRed">FAD DENGE DUNIYA TUMHARI</span>
+        </h1>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="font-orbitron text-2xl font-black tracking-tighter">
+            <span class="text-akatsukiRed">AKA</span>STUKI
+        </div>
+        
+        <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em]">
+            <a href="#hero" class="hover:text-akatsukiRed transition">Main</a>
+            <a href="#leaders" class="hover:text-akatsukiRed transition">Triumvirate</a>
+            <a href="#laws" class="hover:text-akatsukiRed transition">Shadow Laws</a>
+            <a href="#nickname" class="hover:text-akatsukiRed transition">Registry</a>
+            <a href="#join" class="text-akatsukiRed underline decoration-2 underline-offset-4">Join Us</a>
+        </div>
+
+        <button id="themeToggle" class="p-2 rounded-full glass hover:rotate-12 transition text-xl">
+            <span id="themeIcon">🌙</span>
+        </button>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative">
+        <div class="reveal">
+            <div class="bg-akatsukiRed/10 text-akatsukiRed text-[10px] font-bold py-1 px-4 rounded-full inline-block mb-4 tracking-[0.3em] uppercase">The Elite Brotherhood</div>
+            <h1 class="font-orbitron text-5xl md:text-9xl font-black uppercase leading-none mb-6 tracking-tighter">
+                AKA<span class="text-transparent bg-clip-text bg-gradient-to-r from-akatsukiRed to-akatsukiPurple">STUKI</span>
+            </h1>
+            <p class="text-gray-400 dark:text-gray-400 light:text-gray-600 max-w-xl mx-auto text-base md:text-lg mb-10 italic">
+                “Fad Denge Duniya Tumhari — When we enter, the map turns red.”
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="#join" class="px-8 py-3 bg-akatsukiRed text-white font-orbitron text-sm font-bold rounded shadow-lg shadow-akatsukiRed/30 hover:scale-105 transition">INITIATE TRIAL</a>
+                <a href="#nickname" class="px-8 py-3 glass font-orbitron text-sm font-bold rounded hover:bg-white/10 transition">GET TAG</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEADERS SECTION -->
+    <section id="leaders" class="py-24 px-6 md:px-12">
+        <h2 class="font-orbitron text-3xl font-bold text-center mb-16 tracking-widest uppercase">The <span class="text-akatsukiRed">Commanders</span></h2>
+        
+        <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <!-- LEADER -->
+            <div class="reveal glass p-4 rounded-3xl neon-red relative group">
+                <div class="absolute -top-3 -right-3 bg-akatsukiRed text-white text-[10px] font-bold px-3 py-1 rounded rotate-6 z-10">GUILD LEADER</div>
+                <div class="leader-slider aspect-square overflow-hidden rounded-2xl mb-6">
+                    <div class="slider-track" id="trackL">
+                        <img src="https://i.ibb.co/v6LmFLPz/1778320031463.png" class="w-full object-cover shrink-0">
+                        <img src="https://i.ibb.co/KnV3DJ5/1778320027912.png" class="w-full object-cover shrink-0">
+                        <img src="https://i.ibb.co/CKWK301w/1778320024563.png" class="w-full object-cover shrink-0">
+                        <img src="https://i.ibb.co/dwFgZ1m2/1778320037219.png" class="w-full object-cover shrink-0">
+                    </div>
+                </div>
+                <h3 class="font-orbitron text-xl font-bold text-center mb-1">ꪎᯓSʜᴀᴅᴏᴡᯓ🖤</h3>
+                <p class="text-[10px] text-gray-500 text-center uppercase tracking-widest italic">The Supreme Monarch</p>
+            </div>
+
+            <!-- CO-LEADER -->
+            <div class="reveal glass p-4 rounded-3xl relative group" style="transition-delay: 150ms;">
+                <div class="absolute -top-3 -right-3 bg-akatsukiPurple text-white text-[10px] font-bold px-3 py-1 rounded -rotate-6 z-10">CO-LEADER</div>
+                <div class="leader-slider aspect-square overflow-hidden rounded-2xl mb-6 border border-akatsukiPurple/30">
+                    <div class="slider-track" id="trackC">
+                        <img src="https://i.ibb.co/S46HrNXz/1778325980138.png" class="w-full object-cover shrink-0">
+                        <img src="https://i.ibb.co/xtvM1S1H/1778325993434.png" class="w-full object-cover shrink-0">
+                        <img src="https://i.ibb.co/Jj2C8Zw1/1778325997581.png" class="w-full object-cover shrink-0">
+                        <img src="https://i.ibb.co/cXkzk2f0/1778326001661.png" class="w-full object-cover shrink-0">
+                    </div>
+                </div>
+                <h3 class="font-orbitron text-xl font-bold text-center mb-1">ꪎᯓMʀ.Hᴏɴᴇʏᯓ🖤</h3>
+                <p class="text-[10px] text-gray-500 text-center uppercase tracking-widest italic">The Strategic Ghost</p>
+            </div>
+
+            <!-- ELDER -->
+            <div class="reveal glass p-4 rounded-3xl relative group" style="transition-delay: 300ms;">
+                <div class="absolute -top-3 -right-3 bg-white light:bg-black text-black light:text-white text-[10px] font-bold px-3 py-1 rounded rotate-3 z-10">ELDER MEMBER</div>
+                <div class="leader-slider aspect-square overflow-hidden rounded-2xl mb-6">
+                    <div class="slider-track" id="trackE">
+                        <img src="https://i.ibb.co/238K6Ntt/1778326151378.png" class="w-full object-cover shrink-0">
+                        <img src="https://i.ibb.co/sc6wbjR/1778326143192.png" class="w-full object-cover shrink-0">
+                        <img src="https://i.ibb.co/FqBnNSrY/1778326137882.png" class="w-full object-cover shrink-0">
+                    </div>
+                </div>
+                <h3 class="font-orbitron text-xl font-bold text-center mb-1">ꪎᯓMᴏᴏɴᯓ🌙</h3>
+                <p class="text-[10px] text-gray-500 text-center uppercase tracking-widest italic">The Lunar Assassin</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GUILD LAWS & WAR RULES -->
+    <section id="laws" class="py-24 px-6 md:px-12 bg-black/30">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-20 tracking-widest uppercase">Guild <span class="text-akatsukiRed">Laws & Protocols</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Shadow Laws -->
+                <div class="reveal space-y-6">
+                    <h3 class="font-orbitron text-xl font-bold flex items-center gap-3">
+                        <span class="w-8 h-8 bg-akatsukiRed rounded flex items-center justify-center">01</span>
+                        THE SHADOW LAWS
+                    </h3>
+                    <div class="glass p-6 rounded-2xl border-l-4 border-akatsukiRed space-y-4">
+                        <p class="text-sm font-semibold text-akatsukiRed uppercase">Respect Hierarchy</p>
+                        <p class="text-xs text-gray-400">Total respect for Leader, Co-Leader, and Elders. Toxicity is a one-way ticket out.</p>
+                        <hr class="border-white/5">
+                        <p class="text-sm font-semibold text-akatsukiRed uppercase">Tag Mandatory</p>
+                        <p class="text-xs text-gray-400">Every member must carry the ꪎᯓNAMEᯓ🖤 tag. It represents our bloodline.</p>
+                        <hr class="border-white/5">
+                        <p class="text-sm font-semibold text-akatsukiRed uppercase">Combat Activity</p>
+                        <p class="text-xs text-gray-400">Login daily. 2 days of inactivity without notice = Kicked immediately.</p>
+                    </div>
+                </div>
+
+                <!-- War Protocols -->
+                <div class="reveal space-y-6" style="transition-delay: 200ms;">
+                    <h3 class="font-orbitron text-xl font-bold flex items-center gap-3">
+                        <span class="w-8 h-8 bg-akatsukiPurple rounded flex items-center justify-center">02</span>
+                        WAR PROTOCOLS
+                    </h3>
+                    <div class="glass p-6 rounded-2xl border-l-4 border-akatsukiPurple space-y-4">
+                        <p class="text-sm font-semibold text-akatsukiPurple uppercase">Voice Communication</p>
+                        <p class="text-xs text-gray-400">Mic must be ON during Guild Wars. Silent players cannot stay in the squad.</p>
+                        <hr class="border-white/5">
+                        <p class="text-sm font-semibold text-akatsukiPurple uppercase">Follow the IGL</p>
+                        <p class="text-xs text-gray-400">Don't rush like a bot. Follow the IGL's mark. Unity is our greatest weapon.</p>
+                        <hr class="border-white/5">
+                        <p class="text-sm font-semibold text-akatsukiPurple uppercase">No Toxic Lobby</p>
+                        <p class="text-xs text-gray-400">Don't abuse opponents in global. Let your recoil do the talking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NICKNAME GENERATOR -->
+    <section id="nickname" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto glass p-10 rounded-[3rem] reveal border border-akatsukiRed/20 shadow-2xl">
+            <h2 class="font-orbitron text-2xl font-bold text-center mb-8 uppercase tracking-widest">Guild <span class="text-akatsukiRed">Registry</span></h2>
+            <div class="flex flex-col md:flex-row gap-4 mb-8">
+                <input type="text" id="nameInput" placeholder="Enter Name..." class="flex-1 bg-black/20 dark:bg-black/20 light:bg-white/50 border border-white/10 p-4 rounded-xl text-white light:text-gray-900 font-orbitron focus:outline-none focus:border-akatsukiRed transition-all">
+                <button onclick="generateNicks()" class="bg-akatsukiRed px-10 py-4 font-bold font-orbitron rounded-xl hover:bg-akatsukiRed/80 transition">GENERATE</button>
+            </div>
+            <div id="nickOutput" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <p class="text-gray-500 italic col-span-2 text-center text-xs">Only ꪎᯓSTYLEᯓ🖤 protocol enabled.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- JOIN SECTION -->
+    <section id="join" class="py-24 px-6 flex flex-col items-center">
+        <div class="max-w-4xl w-full reveal glass rounded-[3rem] overflow-hidden shadow-2xl">
+            <div class="p-12 text-center">
+                <h2 class="font-orbitron text-3xl font-black mb-4 uppercase">The Shadow <span class="text-akatsukiRed">Call</span></h2>
+                <p class="text-gray-500 text-sm mb-10">Prove your worth. Fill the scrolls of recruitment.</p>
+                <div class="rounded-3xl overflow-hidden border border-white/5">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeTimy-g43sWYnGPCNHkUJSGLxAlBiOHxaH6tFrZ9u2OmlMMQ/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-white/5 text-center">
+        <div class="font-orbitron text-2xl font-black mb-4">AKASTUKI</div>
+        <p class="text-[10px] text-gray-500 uppercase tracking-[0.5em] mb-8 italic">Fad Denge Duniya Tumhari</p>
+        <div class="flex justify-center gap-8 mb-8 text-[10px] font-bold">
+            <a href="#" class="hover:text-akatsukiRed">DISCORD</a>
+            <a href="#" class="hover:text-akatsukiRed">INSTAGRAM</a>
+            <a href="#" class="hover:text-akatsukiRed">WHATSAPP</a>
+        </div>
+        <p class="text-[8px] text-gray-700">© 2024 AKASTUKI. FOR THE LEGENDS.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 700);
+            }, 2000);
+        });
+
+        // Theme Toggle Fix
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                themeIcon.innerText = '☀️';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                themeIcon.innerText = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Persistent Theme
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.remove('dark');
+            html.classList.add('light');
+            themeIcon.innerText = '☀️';
+        }
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Auto Sliders
+        function setupSlider(id, count) {
+            const track = document.getElementById(id);
+            let index = 0;
+            setInterval(() => {
+                index = (index + 1) % count;
+                track.style.transform = `translateX(-${index * 100}%)`;
+            }, 3000 + (Math.random() * 1000));
+        }
+        setupSlider('trackL', 4);
+        setupSlider('trackC', 4);
+        setupSlider('trackE', 3);
+
+        // Nickname Generator (Fixed Style)
+        function generateNicks() {
+            const input = document.getElementById('nameInput').value.trim() || 'AKASTUKI';
+            const output = document.getElementById('nickOutput');
+            output.innerHTML = '';
+            
+            const results = [
+                `ꪎᯓ${input}ᯓ🖤`,
+                `ꪎᯓSʜᴀᴅᴏᴡᯓ🖤`,
+                `ꪎᯓMʀ.Hᴏɴᴇʏᯓ🖤`,
+                `ꪎᯓMᴏᴏɴᯓ🖤`
+            ];
+            
+            results.forEach(nick => {
+                const div = document.createElement('div');
+                div.className = 'glass p-4 rounded-xl flex justify-between items-center group transition hover:border-akatsukiRed';
+                div.innerHTML = `
+                    <span class="font-orbitron text-xs">${nick}</span>
+                    <button onclick="copyText('${nick}')" class="bg-akatsukiRed text-[8px] font-bold px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition">COPY</button>
+                `;
+                output.appendChild(div);
+            });
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert("Registered to Clipboard!");
+        }
+    </script>
+</body>
+</html>
